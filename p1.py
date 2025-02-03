@@ -9,6 +9,10 @@ def group_anagrams(words):
             result[hasher(words[i])].append(words[i])
             print(hasher(words[i]),"old")
     print(result)
+    final = []
+    for val in result.keys():
+        final.append(result[val]) 
+    return final
 def hasher(word,mod = 13):
     # combinedVal = 0
     # for char in word:
