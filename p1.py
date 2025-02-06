@@ -1,17 +1,17 @@
 def group_anagrams(words):
     result = {}
     for i in range(len(words)):
-        print(words[i],hasher(words[i]))
+        #print(words[i],hasher(words[i]))
         if hasher(words[i]) not in result.keys():
             result.update({hasher(words[i]):[words[i]]})
-            print("new")
+            #print("new")
         else:
             result[hasher(words[i])].append(words[i])
-            print(hasher(words[i]),"old")
-    print(result)
+            #print(hasher(words[i]),"old")
     final = []
     for val in result.keys():
         final.append(result[val]) 
+    #print(final)
     return final
 def hasher(word,mod = 13):
     # combinedVal = 0
@@ -20,9 +20,10 @@ def hasher(word,mod = 13):
     # return combinedVal % mod
     val = 0 
     word = sort(word)
-    for i in range(0,len(word)):
-        val += ord(word[i]) * 31^i 
-    return val
+    return hash(word)
+    # for i in range(0,len(word)):
+    #     val += ord(word[i]) * 31^i 
+    # return val
 
 def sort(word):
         word = list(word)
@@ -34,7 +35,7 @@ def sort(word):
         return ''.join(word)
 
 def main():
-    words = ["bat", "tab", "eat",  "tea", "tan", "nat"]
+    words = ["bat", "tab", "eat", "tea", "tan", "nat"]
     group_anagrams(words)
 if __name__ == "__main__":
     main()
