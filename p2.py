@@ -1,24 +1,26 @@
 def k_most_frequent(lst, k):
-    occurences, highest, kth = {}, 0, []
-    for i in range(len(lst)):
-        if hasher(lst[i]) not in occurences.keys():
-            occurences.update({hasher(lst[i]):[lst[i]]})
-            if  highest == 0:
-                highest = 1
-        else:
-            occurences[hasher(lst[i])].append(lst[i])
-            if len(occurences[hasher(lst[i])]) >= k and lst[i] not in kth:
-                kth.append(lst[i])
-                highest += 1
-    if highest <= k:
-        for key in occurences.keys():
-            kth.append(occurences[key][0])
-    if len(lst) == 0:
-        kth = []
-    return kth
-def hasher(word):
-    return(hash(word))
+    if k <= 0:
+        return []
+
+    counts = {}
+    for e in lst:
+        counts[e] = counts.get(e, 0) + 1
+
+    leaderboard = sorted(counts, key=lambda x: counts[x], reverse=True)
+    
+    if k > len(leaderboard):
+        return leaderboard
+
+    i = min(len(leaderboard)-1, k)
+
+    while i < len(leaderboard) and counts[leaderboard[i]] == counts[leaderboard[k-1]]:
+        i += 1
+
+    return leaderboard[:i]
+
 def main():
-    k_most_frequent([], 1)
+    print(k_most_frequent([1, 1, 1, 2, 2, 3], 2))  # Example usage
+    print(k_most_frequent([], 1))  # Test with empty list
+
 if __name__ == "__main__":
     main()
