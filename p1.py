@@ -1,37 +1,22 @@
 def group_anagrams(words):
     result = {}
     for i in range(len(words)):
-        #print(words[i],hasher(words[i]))
         if hasher(words[i]) not in result.keys():
             result.update({hasher(words[i]):[words[i]]})
-            #print("new")
         else:
             result[hasher(words[i])].append(words[i])
-            #print(hasher(words[i]),"old")
     final = []
     for val in result.keys():
         final.append(result[val]) 
-    #print(final)
+    print(final)
     return final
 def hasher(word,mod = 13):
-    # combinedVal = 0
-    # for char in word:
-    #     combinedVal += ord(char)
-    # return combinedVal % mod
-    val = 0 
     word = sort(word)
     return hash(word)
-    # for i in range(0,len(word)):
-    #     val += ord(word[i]) * 31^i 
-    # return val
 
 def sort(word):
         word = list(word)
-        for i in range(0,len(word)):
-            smallestElement = i
-            for j in range(i,len(word)):
-                if word[j]<=word[smallestElement]:smallestElement = j#set the new smallest element
-            word[i],word[smallestElement] = word[smallestElement],word[i]#swap stuff
+        word.sort()
         return ''.join(word)
 
 def main():
